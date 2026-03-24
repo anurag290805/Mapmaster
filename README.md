@@ -22,15 +22,15 @@ A full-featured geography quiz web app to test your knowledge of states and coun
 ![Game Setup](screenshots/setup.png)
 *Pick one of four game types and a mode (Practice or Challenge) before starting.*
 
-### 🎯 Locate on Map — World Edition
+### ✍️ Type the Name — World Edition
 ![Locate Mode](screenshots/locate.png)
 *A target country is shown — click it on the interactive SVG map to score.*
 
-### ✍️ Type the Name — India Edition
+### 🎯 Locate on Map — India Edition
 ![Typing Mode](screenshots/typing.png)
 *Type state names from memory to fill the map green.*
 
-### 🏛️ Capitals Mode — India Edition
+### 🏛️ Capitals Mode — United States Edition
 ![Capitals Mode](screenshots/capitals.png)
 *A region is shown — type its capital city to score.*
 
