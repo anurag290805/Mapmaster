@@ -1,0 +1,596 @@
+/* ============================================================
+   MapMaster | game.css
+   Game screen: header, top bar, progress bar, map container,
+   locate/flag/capital prompts, input section, feedback,
+   hint button, review banner, zoom wrapper.
+   ============================================================ */
+
+/* ============================================================
+   GAME SCREEN
+   ============================================================ */
+#gameScreen {
+  padding: 0 24px 16px;
+}
+
+/* ============================================================
+   APP HEADER
+   ============================================================ */
+#appHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 14px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+#headerBrand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+#headerLogo {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--coral);
+  letter-spacing: -0.5px;
+}
+
+#headerSub {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+#headerActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  min-width: unset;
+  flex: unset;
+}
+
+.icon-btn:hover {
+  background: var(--coral-muted);
+  border-color: var(--border-med);
+  color: var(--coral);
+  transform: none;
+  box-shadow: none;
+}
+
+.icon-btn:active { transform: scale(0.9); }
+
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+#topBar {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 16px;
+  flex-shrink: 0;
+}
+
+#topBar > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+#topBar span {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--coral);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+#streakWrapper span { color: #D4813A; }
+
+
+/* ============================================================
+   PROGRESS RING
+   ============================================================ */
+#progressBarWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 12px;
+  flex-shrink: 0;
+}
+
+#progressRing {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+#progressRingTrack {
+  stroke: var(--bg-alt);
+}
+
+#progressRingFill {
+  stroke: var(--accent, var(--coral));
+  stroke-dasharray: 113.1;
+  stroke-dashoffset: 113.1;
+}
+
+#progressRingPct {
+  fill: var(--text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+#progressLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  flex: 1;
+}
+
+
+/* ============================================================
+   MAP TOOLTIP
+   ============================================================ */
+#mapTooltip {
+  position: fixed;
+  background: rgba(20, 20, 20, 0.88);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: 'Poppins', system-ui, sans-serif;
+  pointer-events: none;
+  display: none;
+  z-index: 9999;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  letter-spacing: 0.01em;
+}
+
+body.dark-theme #mapTooltip {
+  background: rgba(240,240,240,0.92);
+  color: #111;
+}
+
+
+/* ============================================================
+   ACCENT COLOR — continent theming
+   Uses --accent CSS var set by JS; falls back to --coral
+   ============================================================ */
+#progressRingFill          { stroke:      var(--accent, var(--coral)); }
+#progressBarFill           { background:  linear-gradient(90deg, var(--accent, var(--coral-soft)), var(--accent, var(--coral))); }
+#mapContainer              { box-shadow:  0 24px 64px rgba(0,0,0,0.09), 0 4px 16px rgba(0,0,0,0.05), 0 0 0 1px var(--accent-glow, rgba(232,96,74,0.06)); }
+#headerLogo                { color:       var(--accent, var(--coral)); }
+.locate-underline,
+.hero-divider              { background:  var(--accent, var(--coral)); }
+
+
+/* ============================================================
+   REGION COUNT BADGE
+   ============================================================ */
+.country-btn {
+  position: relative;
+}
+
+.c-count {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: var(--text-faint);
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+
+/* ============================================================
+   MAP CONTAINER
+   ============================================================ */
+#mapContainer {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 12px;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, #ffffff, #faf6f3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow:
+    0 24px 64px rgba(0,0,0,0.09),
+    0 4px 16px rgba(0,0,0,0.05),
+    0 0 0 1px rgba(232,96,74,0.06);
+  padding: 16px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+  transition: box-shadow 0.3s ease;
+}
+
+#mapContainer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232,96,74,0.04), transparent);
+  pointer-events: none;
+}
+
+#mapZoomWrapper {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  transform-origin: center center;
+  will-change: transform;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#indiaMap {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+#indiaMap svg,
+#indiaMap > * {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ============================================================
+   LOCATE PROMPT
+   ============================================================ */
+#locatePrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 4px 20px 16px;
+  order: -1;
+  text-align: center;
+  animation: locateFadeIn 0.3s ease both;
+}
+
+@keyframes locateFadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.locate-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.locate-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.locate-underline {
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--coral);
+  border-radius: var(--r-full);
+  margin-top: 4px;
+}
+
+
+/* ============================================================
+   FLAG CONTAINER
+   ============================================================ */
+#flagContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 12px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-md);
+  animation: locateFadeIn 0.35s ease both;
+}
+
+.flag-prompt-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.flag-emoji {
+  font-size: 7rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.15));
+  animation: flagPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+#flagImage { display: none; }
+
+
+/* ============================================================
+   CAPITAL PROMPT
+   ============================================================ */
+#capitalPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 8px;
+  padding: 4px 20px 16px;
+  animation: locateFadeIn 0.3s ease both;
+}
+
+.capital-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.capital-region {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+
+/* ============================================================
+   INPUT SECTION
+   ============================================================ */
+#inputSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+#inputActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#stateInput {
+  width: 100%;
+  max-width: 460px;
+  padding: 14px 20px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: var(--surface);
+  border: 1.5px solid var(--border-med);
+  border-radius: var(--r-md);
+  color: var(--text-heading);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  caret-color: var(--coral);
+}
+
+#stateInput::placeholder { color: var(--text-faint); }
+
+#stateInput:focus {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 4px var(--coral-muted);
+}
+
+#submitAnswerBtn {
+  padding: 13px 40px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: var(--coral);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  box-shadow: var(--shadow-coral);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+#submitAnswerBtn:hover  { background: var(--coral-dark); transform: translateY(-2px); box-shadow: 0 10px 32px var(--coral-glow); }
+#submitAnswerBtn:active { transform: scale(0.97); }
+
+
+/* ============================================================
+   FEEDBACK MESSAGE
+   ============================================================ */
+#feedbackMessage {
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-height: 22px;
+  text-align: center;
+  color: var(--text-muted);
+  animation: feedbackIn 0.2s ease both;
+}
+
+@keyframes feedbackIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#feedbackMessage.correct  { color: var(--green); font-weight: 600; }
+#feedbackMessage.wrong    { color: var(--red);   font-weight: 600; }
+#feedbackMessage.hint     { color: #A07020;      font-weight: 600; }
+#feedbackMessage.ut-bonus { color: #7c3aed;      font-weight: 700; font-size: 0.95rem; }
+
+
+/* ============================================================
+   HINT BUTTON
+   ============================================================ */
+.hint-btn {
+  padding: 13px 20px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1.5px solid var(--border-med);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.hint-btn:hover {
+  border-color: #F0C040;
+  color: #A07020;
+  background: rgba(240, 192, 64, 0.1);
+  transform: translateY(-2px);
+}
+
+.hint-btn:active { transform: scale(0.96); }
+
+
+/* ============================================================
+   REVIEW BANNER
+   ============================================================ */
+#reviewBanner {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: var(--surface);
+  border: 1px solid var(--border-med);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 240px;
+  text-align: center;
+  animation: locateFadeIn 0.3s ease both;
+}
+
+.review-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.review-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+#reviewExitBtn {
+  margin-top: 8px;
+  padding: 7px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--coral-muted);
+  border: 1.5px solid var(--coral);
+  color: var(--coral);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#reviewExitBtn:hover { background: var(--coral); color: #fff; }
+
+
+/* ============================================================
+   CONFETTI CANVAS
+   ============================================================ */
+.confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.confetti-canvas.hidden { display: none; }
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 640px) {
+  #gameScreen { padding: 16px 12px 12px; }
+
+  #topBar           { flex-direction: column; gap: 8px; }
+  #topBar > div     { flex-direction: row; justify-content: space-between; }
+
+  #stateInput       { max-width: 100%; }
+
+  #mapContainer     { padding: 8px; }
+}

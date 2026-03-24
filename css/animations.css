@@ -1,0 +1,214 @@
+/* ============================================================
+   MapMaster | animations.css
+   All @keyframes and animation utility classes.
+   ============================================================ */
+
+/* ============================================================
+   MAP SHAKE — wrong click in locate mode
+   ============================================================ */
+@keyframes regionShake {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-4px); }
+  40%  { transform: translateX(4px); }
+  60%  { transform: translateX(-3px); }
+  80%  { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+.map-shake { animation: regionShake 0.35s ease; }
+
+
+/* ============================================================
+   CORRECT STATE PULSE
+   ============================================================ */
+@keyframes stateCorrectPulse {
+  0%   { filter: brightness(1); }
+  40%  { filter: brightness(1.35) drop-shadow(0 0 6px rgba(45,158,107,0.6)); }
+  100% { filter: brightness(1); }
+}
+.state-correct-flash { animation: stateCorrectPulse 0.4s ease forwards; }
+
+
+/* ============================================================
+   UNION TERRITORY PULSE
+   ============================================================ */
+@keyframes utPulse {
+  0%   { filter: brightness(1); }
+  40%  { filter: brightness(1.4) drop-shadow(0 0 8px rgba(139,92,246,0.7)); }
+  100% { filter: brightness(1); }
+}
+.ut-correct-flash { animation: utPulse 0.45s ease forwards; }
+
+
+/* ============================================================
+   UT ACHIEVEMENT TOAST
+   ============================================================ */
+#utAchievement {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, #4c1d95, #7c3aed);
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: var(--r-lg);
+  box-shadow: 0 8px 32px rgba(124,58,237,0.45);
+  transform: translateY(120px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.4s ease;
+  max-width: 320px;
+}
+#utAchievement.ut-achievement-show { transform: translateY(0); opacity: 1; }
+.ut-achievement-icon  { font-size: 2rem; flex-shrink: 0; }
+.ut-achievement-text  { display: flex; flex-direction: column; gap: 2px; }
+.ut-achievement-text strong { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; }
+.ut-achievement-text span   { font-size: 0.75rem; opacity: 0.85; }
+
+
+/* ============================================================
+   FLAG POP
+   ============================================================ */
+@keyframes flagPop {
+  from { opacity: 0; transform: scale(0.7) rotate(-4deg); }
+  to   { opacity: 1; transform: scale(1)   rotate(0deg); }
+}
+
+
+/* ============================================================
+   DIRECTIONAL SCREEN TRANSITIONS
+   ============================================================ */
+@keyframes slideInRight {
+  from { transform: translateX(40px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes slideOutLeft {
+  from { transform: translateX(0);     opacity: 1; }
+  to   { transform: translateX(-40px); opacity: 0; }
+}
+@keyframes slideInLeft {
+  from { transform: translateX(-40px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes slideOutRight {
+  from { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(40px); opacity: 0; }
+}
+
+.slide-in-right  { animation: slideInRight  0.3s cubic-bezier(0.22,1,0.36,1) both; }
+.slide-out-left  { animation: slideOutLeft  0.22s ease forwards; }
+.slide-in-left   { animation: slideInLeft   0.3s cubic-bezier(0.22,1,0.36,1) both; }
+.slide-out-right { animation: slideOutRight 0.22s ease forwards; }
+
+/* Keep old classes as fallback */
+.screen-exit  { animation: slideOutLeft  0.25s ease forwards; }
+.screen-enter { animation: slideInRight  0.3s  cubic-bezier(0.22,1,0.36,1) forwards; }
+
+
+/* ============================================================
+   BUTTON MICRO-ANIMATION — select pop
+   ============================================================ */
+@keyframes selectPop {
+  0%   { transform: translateY(-2px) scale(1);    }
+  30%  { transform: translateY(-2px) scale(0.94); }
+  70%  { transform: translateY(-2px) scale(1.04); }
+  100% { transform: translateY(-2px) scale(1);    }
+}
+.btn-pop { animation: selectPop 0.25s cubic-bezier(0.22,1,0.36,1) forwards; }
+
+
+/* ============================================================
+   MAP PIN — correct guess checkmark
+   ============================================================ */
+@keyframes pinPop {
+  from { transform: scale(0) translateY(4px); opacity: 0; }
+  to   { transform: scale(1) translateY(0);   opacity: 1; }
+}
+.map-pin {
+  fill: #2D9E6B;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  pointer-events: none;
+  animation: pinPop 0.25s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+
+/* ============================================================
+   WRONG REGION LABEL
+   ============================================================ */
+@keyframes wrongLabelIn {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to   { opacity: 1; transform: translate(-50%, -50%); }
+}
+@keyframes wrongLabelOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+.wrong-region-label {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  background: rgba(239,68,68,0.92);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: 'Poppins', system-ui, sans-serif;
+  pointer-events: none;
+  z-index: 9000;
+  white-space: nowrap;
+  animation: wrongLabelIn 0.15s ease both,
+             wrongLabelOut 0.3s ease 1.2s forwards;
+}
+
+
+/* ============================================================
+   HERO MAP BACKGROUND
+   ============================================================ */
+@keyframes mapDrift {
+  from { transform: translate(-2%, -2%) scale(1.04); }
+  to   { transform: translate(2%,  2%) scale(1.04); }
+}
+@keyframes regionGlowPulse {
+  0%,100% { opacity: 0.7; filter: drop-shadow(0 0 0px rgba(232,96,74,0)); }
+  50%      { opacity: 1;   filter: drop-shadow(0 0 8px rgba(232,96,74,0.6)); }
+}
+.region-glow { animation: regionGlowPulse 1.5s ease-in-out; }
+
+
+/* ============================================================
+   PROGRESS RING FILL TRANSITION
+   ============================================================ */
+#progressRingFill {
+  transition: stroke-dashoffset 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 640px) {
+  #startScreen,
+  #challengeSettings,
+  #winScreen,
+  #loseScreen       { padding: 40px 16px; }
+
+  .hero-block       { margin-bottom: 44px; }
+
+  #gameModeSection  { grid-template-columns: 1fr 1fr; }
+  #difficultySection { flex-direction: row; }
+
+  #timerSection,
+  #livesSection     { flex-wrap: wrap; }
+
+  #timerSection button,
+  #livesSection button { min-width: 80px; }
+
+  button            { width: 100%; }
+  .settings-card    { padding: 32px 20px; }
+
+  #statsSection     { flex-direction: column; align-items: center; }
+  #statsSection p   { width: 100%; max-width: 280px; }
+}

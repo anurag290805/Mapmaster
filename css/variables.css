@@ -1,0 +1,91 @@
+/* ============================================================
+   MapMaster | variables.css
+   CSS custom properties (light + dark theme)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Coral Palette */
+  --coral:          #E8604A;
+  --coral-dark:     #C94A34;
+  --coral-soft:     #F0826D;
+  --coral-muted:    rgba(232, 96, 74, 0.12);
+  --coral-glow:     rgba(232, 96, 74, 0.28);
+
+  /* Neutrals */
+  --bg:             #FAF8F6;
+  --bg-alt:         #F2EDE9;
+  --surface:        #FFFFFF;
+  --border:         rgba(0, 0, 0, 0.08);
+  --border-med:     rgba(0, 0, 0, 0.13);
+
+  /* Text */
+  --text-heading:   #1A1410;
+  --text-body:      #3D342E;
+  --text-muted:     #9E8E85;
+  --text-faint:     #C5B8B1;
+
+  /* States */
+  --green:          #2D9E6B;
+  --green-light:    rgba(45, 158, 107, 0.12);
+  --red:            #C94A5A;
+  --red-light:      rgba(201, 74, 90, 0.12);
+
+  /* Shadows */
+  --shadow-sm:      0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md:      0 6px 24px rgba(0,0,0,0.09);
+  --shadow-lg:      0 16px 48px rgba(0,0,0,0.12);
+  --shadow-coral:   0 8px 28px var(--coral-glow);
+
+  /* Radius */
+  --r-sm:   8px;
+  --r-md:   12px;
+  --r-lg:   18px;
+  --r-xl:   24px;
+  --r-full: 999px;
+}
+
+/* ============================================================
+   DARK THEME OVERRIDES
+   ============================================================ */
+body.dark-theme {
+  --bg:             #0f172a;
+  --bg-alt:         #1e293b;
+  --surface:        #1e293b;
+  --border:         rgba(255,255,255,0.08);
+  --border-med:     rgba(255,255,255,0.15);
+  --text-heading:   #f8fafc;
+  --text-body:      #e2e8f0;
+  --text-muted:     #94a3b8;
+  --text-faint:     #64748b;
+  --coral-muted:    rgba(232, 96, 74, 0.25);
+  --coral-glow:     rgba(232, 96, 74, 0.5);
+  --shadow-sm:      0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md:      0 6px 24px rgba(0,0,0,0.4);
+  --shadow-lg:      0 16px 48px rgba(0,0,0,0.5);
+}
+
+body.dark-theme #mapContainer {
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, #0d1b2e, #0a1525);
+}
+
+body.dark-theme #progressRingTrack { stroke: #1e293b; }
+body.dark-theme #progressRingPct   { fill: var(--text-muted); }
+
+body.dark-theme .settings-card  { background: var(--surface); }
+
+body.dark-theme #progressBarTrack {
+  background: #1e293b;
+  border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-theme #stateInput {
+  background: #1e293b;
+  color: var(--text-heading);
+}
+
+body.dark-theme #stateInput::placeholder { color: var(--text-faint); }
+
+body.dark-theme #winScreen  { background: linear-gradient(160deg, #0f172a 0%, #1a1f2e 100%); }
+body.dark-theme #loseScreen { background: linear-gradient(160deg, #0f172a 0%, #1f1a1e 100%); }
