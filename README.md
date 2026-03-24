@@ -2,6 +2,8 @@
 
 A full-featured geography quiz web app to test your knowledge of states and countries across the world — built entirely with vanilla HTML, CSS, and JavaScript.
 
+🌐 **[Play it live → anurag290805.github.io/mapmaster](https://anurag290805.github.io/mapmaster)**
+
 ---
 
 ## 📸 Screenshots
@@ -86,13 +88,18 @@ No frameworks, no build tools, no dependencies. Open `index.html` and it runs.
 
 ## 🚀 Getting Started
 
-### 1. Clone the repository
+### Play online
+No setup needed — just visit **[anurag290805.github.io/mapmaster](https://anurag290805.github.io/mapmaster)** to play instantly.
+
+### Run locally
+
+#### 1. Clone the repository
 ```bash
 git clone https://github.com/anurag290805/mapmaster.git
 cd mapmaster
 ```
 
-### 2. Add SVG maps
+#### 2. Add SVG maps
 
 Place your SVG map files in a `svg/` folder. Required files:
 ```
@@ -116,7 +123,7 @@ svg/uae.svg            svg/vietnam.svg
 
 Each SVG should have `<path>` elements with `aria-label`, `id`, `name`, `data-name`, or a child `<title>` tag identifying the region name. The `aria-label` attribute is the primary selector — patch your SVGs to use this for best reliability.
 
-### 3. Open the app
+#### 3. Open the app
 ```bash
 open index.html
 # or just double-click index.html in your file explorer
