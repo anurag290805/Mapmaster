@@ -323,39 +323,24 @@ indiaMap.addEventListener("load", () => {
 
   applyMapThemeColors();
 
-  // Strip native SVG <title> tooltips in challenge mode — the browser renders
-  // these natively and can't be suppressed any other way
-  if (gameState.gameMode === "challenge") {
-    svgDoc.querySelectorAll("path").forEach(path => {
-      path.querySelectorAll("title").forEach(t => t.remove());
-    });
-    // Also strip top-level <title> elements inside the SVG
-    svgDoc.querySelectorAll("title").forEach(t => t.remove());
-  }
-
   // Tooltip element
   const tooltip = document.getElementById("mapTooltip");
 
-  // Delegated mouseover — hover highlight + tooltip (practice mode only)
+  // Delegated mouseover — hover + tooltip
   svgDoc.addEventListener("mouseover", (e) => {
     const label = getRegionName(e.target);
     if (!label) return;
-
-    // Hover highlight: practice mode only
-    if (gameState.gameMode === "practice") {
-      const fill = darkMode ? "#4a7fa8" : "#f0a898";
-      if (!gameState.guessedStates.includes(label)) e.target.style.fill = fill;
-    }
-
-    // Tooltip: practice mode only, and never in locate (would give away the target)
-    if (tooltip && gameState.gameMode === "practice" && gameState.gameType !== "locate") {
+    const fill = darkMode ? "#4a7fa8" : "#f0a898";
+    if (!gameState.guessedStates.includes(label)) e.target.style.fill = fill;
+    // Tooltip: show in all modes except locate (don't give away the answer)
+    if (tooltip && gameState.gameType !== "locate") {
       tooltip.textContent = label;
       tooltip.style.display = "block";
     }
   });
 
   svgDoc.addEventListener("mousemove", (e) => {
-    if (!tooltip || tooltip.style.display === "none") return;
+    if (!tooltip) return;
     // e.clientX/Y is relative to the <object> frame, not the page.
     // Add the object element's bounding rect to get true page coordinates.
     const objRect = indiaMap.getBoundingClientRect();
@@ -367,8 +352,7 @@ indiaMap.addEventListener("load", () => {
 
   svgDoc.addEventListener("mouseout", (e) => {
     const label = getRegionName(e.target);
-    // Only reset fill if we applied the hover highlight (practice mode)
-    if (gameState.gameMode === "practice" && label && !gameState.guessedStates.includes(label)) {
+    if (label && !gameState.guessedStates.includes(label)) {
       e.target.style.fill = darkMode ? "#2d4a6e" : "#e2d9d0";
     }
     if (tooltip) tooltip.style.display = "none";
@@ -407,23 +391,6 @@ indiaMap.addEventListener("load", () => {
     wrapper.style.transform = `scale(${scale}) translate(${tx}px, ${ty}px)`;
     wrapper.style.cursor = scale > 1 ? (dragging ? "grabbing" : "grab") : "default";
   }
-
-  container.addEventListener("wheel", e => {
-    e.preventDefault();
-    const prev   = scale;
-    const factor = e.deltaY < 0 ? 1.12 : 0.9;
-    scale = Math.min(Math.max(1, scale * factor), 6);
-    if (scale > 1) {
-      const rect = wrapper.getBoundingClientRect();
-      const cx = (e.clientX - rect.left  - rect.width  / 2) / prev;
-      const cy = (e.clientY - rect.top   - rect.height / 2) / prev;
-      tx -= cx * (scale - prev);
-      ty -= cy * (scale - prev);
-    } else {
-      tx = 0; ty = 0;
-    }
-    applyTransform();
-  }, { passive: false });
 
   container.addEventListener("mousedown", e => {
     if (scale <= 1) return;
