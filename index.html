@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MapMaster</title>
+
+    <!-- CSS — load order matters: variables first, then base, then components -->
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/screens.css" />
+    <link rel="stylesheet" href="css/game.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+  </head>
+  <body>
+
+    <!-- START SCREEN - scope selection only -->
+    <div id="startScreen">
+      <div id="heroMapBg"></div>
+
+      <div class="hero-block">
+        <h1>Map<span>Master</span></h1>
+        <p class="hero-subtitle">Test your geography knowledge</p>
+        <div class="hero-divider"></div>
+      </div>
+
+      <section id="scopeSection">
+        <h3>Select Region</h3>
+        <button id="countryScopeBtn">&#127758; Country</button>
+        <button id="continentScopeBtn">&#128506; Continent</button>
+        <button id="worldScopeBtn">&#127757; World</button>
+      </section>
+
+    </div>
+
+    <!-- COUNTRY SELECT SCREEN -->
+    <div id="countrySelectScreen" class="hidden">
+
+      <div class="hero-block">
+        <h1>Select<span> Country</span></h1>
+        <div id="breadcrumb"></div>
+        <div class="hero-divider"></div>
+      </div>
+
+      <section id="countrySection">
+        <h3>Choose a country</h3>
+        <div class="country-grid">
+          <button data-country="argentina"     class="country-btn"><span class="c-flag">&#127462;&#127479;</span><span class="c-name">Argentina</span></button>
+          <button data-country="australia"     class="country-btn"><span class="c-flag">&#127462;&#127482;</span><span class="c-name">Australia</span></button>
+          <button data-country="brazil"        class="country-btn"><span class="c-flag">&#127463;&#127479;</span><span class="c-name">Brazil</span></button>
+          <button data-country="canada"        class="country-btn"><span class="c-flag">&#127464;&#127462;</span><span class="c-name">Canada</span></button>
+          <button data-country="china"         class="country-btn"><span class="c-flag">&#127464;&#127475;</span><span class="c-name">China</span></button>
+          <button data-country="egypt"         class="country-btn"><span class="c-flag">&#127466;&#127468;</span><span class="c-name">Egypt</span></button>
+          <button data-country="france"        class="country-btn"><span class="c-flag">&#127467;&#127479;</span><span class="c-name">France</span></button>
+          <button data-country="germany"       class="country-btn"><span class="c-flag">&#127465;&#127466;</span><span class="c-name">Germany</span></button>
+          <button data-country="greece"        class="country-btn"><span class="c-flag">&#127468;&#127479;</span><span class="c-name">Greece</span></button>
+          <button data-country="india"         class="country-btn"><span class="c-flag">&#127470;&#127475;</span><span class="c-name">India</span></button>
+          <button data-country="indonesia"     class="country-btn"><span class="c-flag">&#127470;&#127465;</span><span class="c-name">Indonesia</span></button>
+          <button data-country="italy"         class="country-btn"><span class="c-flag">&#127470;&#127481;</span><span class="c-name">Italy</span></button>
+          <button data-country="japan"         class="country-btn"><span class="c-flag">&#127471;&#127477;</span><span class="c-name">Japan</span></button>
+          <button data-country="mexico"        class="country-btn"><span class="c-flag">&#127474;&#127485;</span><span class="c-name">Mexico</span></button>
+          <button data-country="nigeria"       class="country-btn"><span class="c-flag">&#127475;&#127468;</span><span class="c-name">Nigeria</span></button>
+          <button data-country="pakistan"      class="country-btn"><span class="c-flag">&#127477;&#127472;</span><span class="c-name">Pakistan</span></button>
+          <button data-country="russia"        class="country-btn"><span class="c-flag">&#127479;&#127482;</span><span class="c-name">Russia</span></button>
+          <button data-country="southAfrica"   class="country-btn"><span class="c-flag">&#127487;&#127462;</span><span class="c-name">South Africa</span></button>
+          <button data-country="southKorea"    class="country-btn"><span class="c-flag">&#127472;&#127479;</span><span class="c-name">South Korea</span></button>
+          <button data-country="spain"         class="country-btn"><span class="c-flag">&#127466;&#127480;</span><span class="c-name">Spain</span></button>
+          <button data-country="thailand"      class="country-btn"><span class="c-flag">&#127481;&#127469;</span><span class="c-name">Thailand</span></button>
+          <button data-country="turkey"        class="country-btn"><span class="c-flag">&#127481;&#127479;</span><span class="c-name">Turkey</span></button>
+          <button data-country="uae"           class="country-btn"><span class="c-flag">&#127462;&#127466;</span><span class="c-name">UAE</span></button>
+          <button data-country="usa"           class="country-btn"><span class="c-flag">&#127482;&#127480;</span><span class="c-name">USA</span></button>
+          <button data-country="vietnam"       class="country-btn"><span class="c-flag">&#127483;&#127475;</span><span class="c-name">Vietnam</span></button>
+        </div>
+      </section>
+
+      <div id="countryContinueWrapper">
+        <button id="countryBackBtn" class="back-btn">&#8592; Back</button>
+        <button id="countryContinueBtn" disabled>Continue &#8594;</button>
+      </div>
+
+    </div>
+
+    <!-- CONTINENT SELECT SCREEN -->
+    <div id="continentSelectScreen" class="hidden">
+
+      <div class="hero-block">
+        <h1>Select<span> Continent</span></h1>
+        <div id="breadcrumbContinent"></div>
+        <div class="hero-divider"></div>
+      </div>
+
+      <section id="continentSection">
+        <h3>Choose a continent</h3>
+        <div class="continent-grid">
+          <button data-continent="africa"       class="continent-btn"><span class="c-flag">&#127758;</span><span class="c-name">Africa</span></button>
+          <button data-continent="asia"         class="continent-btn"><span class="c-flag">&#127759;</span><span class="c-name">Asia</span></button>
+          <button data-continent="europe"       class="continent-btn"><span class="c-flag">&#127757;</span><span class="c-name">Europe</span></button>
+          <button data-continent="northAmerica" class="continent-btn"><span class="c-flag">&#127758;</span><span class="c-name">North America</span></button>
+          <button data-continent="oceania"      class="continent-btn"><span class="c-flag">&#127758;</span><span class="c-name">Oceania</span></button>
+          <button data-continent="southAmerica" class="continent-btn"><span class="c-flag">&#127758;</span><span class="c-name">South America</span></button>
+        </div>
+      </section>
+
+      <div id="continentBackWrapper">
+        <button id="continentBackBtn" class="back-btn">&#8592; Back</button>
+      </div>
+
+    </div>
+
+    <!-- SETUP SCREEN - game type + mode -->
+    <div id="setupScreen" class="hidden">
+
+      <div class="hero-block">
+        <h1>Game<span> Setup</span></h1>
+        <p class="hero-subtitle" id="setupSubtitle"></p>
+        <div id="breadcrumbSetup"></div>
+        <div class="hero-divider"></div>
+      </div>
+
+      <div class="setup-group">
+        <h3>Select Game Type</h3>
+        <div id="gameModeSection">
+          <button id="typingModeBtn">
+            <span class="btn-icon">✍️</span>
+            <span class="btn-title">Type the Name</span>
+            <span class="btn-desc">Name every region from memory</span>
+          </button>
+          <button id="locateModeBtn">
+            <span class="btn-icon">🎯</span>
+            <span class="btn-title">Locate on Map</span>
+            <span class="btn-desc">Click the right region on the map</span>
+          </button>
+          <button id="flagModeBtn">
+            <span class="btn-icon">🚩</span>
+            <span class="btn-title">Flags</span>
+            <span class="btn-desc">Identify countries by their flag</span>
+          </button>
+          <button id="capitalModeBtn">
+            <span class="btn-icon">🏛️</span>
+            <span class="btn-title">Capitals</span>
+            <span class="btn-desc">Name the capital of each region</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="setup-group">
+        <h3>Select Mode</h3>
+        <div id="difficultySection">
+          <button id="practiceModeBtn">🌱 Practice</button>
+          <button id="challengeModeBtn">⚡ Challenge</button>
+        </div>
+      </div>
+
+      <div id="homeStartWrapper">
+        <button id="setupBackBtn" class="back-btn">&#8592; Back</button>
+        <button id="homeStartBtn" disabled>Start Game &#8594;</button>
+      </div>
+
+    </div>
+
+    <!-- CHALLENGE SETTINGS SCREEN -->
+    <div id="challengeSettings" class="hidden">
+      <div class="settings-card">
+
+        <h2>Challenge Settings</h2>
+
+        <section id="timerSection">
+          <h3>Timer Duration</h3>
+          <button data-time="120">2 Minutes</button>
+          <button data-time="180">3 Minutes</button>
+          <button data-time="300">5 Minutes</button>
+        </section>
+
+        <section id="livesSection">
+          <h3>Number of Lives</h3>
+          <button data-lives="3">3 Lives</button>
+          <button data-lives="5">5 Lives</button>
+          <button data-lives="10">10 Lives</button>
+        </section>
+
+        <div id="challengeBackWrapper">
+          <button id="challengeBackBtn" class="back-btn">&#8592; Back</button>
+          <button id="startGameBtn">Start Game</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="gameScreen" class="hidden">
+
+      <header id="appHeader">
+        <div id="headerBrand">
+          <span id="headerLogo">MapMaster</span>
+          <span id="headerSub">India Edition</span>
+        </div>
+        <div id="headerActions">
+          <button class="icon-btn" id="soundToggleBtn"  title="Toggle Sound">&#128266;</button>
+          <button class="icon-btn" id="themeToggleBtn"  title="Toggle Theme">&#127769;</button>
+          <button class="icon-btn" id="headerRestartBtn" title="Restart">&#8634;</button>
+        </div>
+      </header>
+
+      <div id="topBar">
+        <div id="scoreWrapper">  Score  <span id="scoreDisplay">0</span></div>
+        <div id="timerWrapper">  Time   <span id="timerDisplay">--</span></div>
+        <div id="livesWrapper">  Lives  <span id="livesDisplay">--</span></div>
+        <div id="streakWrapper"> Streak <span id="streakDisplay">0</span></div>
+      </div>
+
+      <div id="progressBarWrapper">
+        <svg id="progressRing" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+          <circle id="progressRingTrack" cx="22" cy="22" r="18" fill="none" stroke-width="4"/>
+          <circle id="progressRingFill"  cx="22" cy="22" r="18" fill="none" stroke-width="4"
+            stroke-linecap="round"
+            transform="rotate(-90 22 22)"/>
+          <text id="progressRingPct" x="22" y="26" text-anchor="middle">0%</text>
+        </svg>
+        <div id="progressBarTrack" class="hidden">
+          <div id="progressBarFill"></div>
+        </div>
+        <span id="progressLabel">0 / 28 States</span>
+      </div>
+
+      <div id="mapTooltip"></div>
+
+      <div id="flagContainer" class="hidden">
+        <div class="flag-prompt-label">Which country is this flag?</div>
+        <img id="flagImage" src="" alt="Flag" />
+      </div>
+
+      <div id="capitalPrompt" class="hidden">
+        <span class="capital-label">Capital of</span>
+        <span class="capital-region"></span>
+        <span class="locate-underline"></span>
+      </div>
+
+      <div id="mapContainer">
+        <div id="locatePrompt" class="hidden">
+          <span class="locate-label">Target</span>
+          <span class="locate-name"></span>
+          <span class="locate-underline"></span>
+        </div>
+        <div id="mapZoomWrapper">
+          <object type="image/svg+xml" data="svg/india.svg" id="indiaMap"></object>
+        </div>
+      </div>
+
+      <div id="inputSection">
+        <input type="text" id="stateInput" placeholder="Type a state name..." autocomplete="off" />
+        <div id="inputActions">
+          <button id="submitAnswerBtn">Submit</button>
+          <button id="hintBtn" class="hint-btn" title="Use a hint">💡 Hint</button>
+        </div>
+        <div id="feedbackMessage"></div>
+      </div>
+
+    </div>
+
+    <!-- WIN SCREEN -->
+    <div id="winScreen" class="hidden">
+      <h2>&#127881; You did it!</h2>
+      <div id="statsSection">
+        <p>Time Taken   <span id="finalTime">--</span></p>
+        <p>Accuracy     <span id="finalAccuracy">--</span>%</p>
+        <p>Best Streak  <span id="finalStreak">--</span></p>
+        <p id="utBonusStat" class="hidden">UT Bonus <span id="finalUTBonus">--</span></p>
+      </div>
+      <button id="restartBtn">Play Again</button>
+    </div>
+
+    <!-- LOSE SCREEN -->
+    <div id="loseScreen" class="hidden">
+      <h2>Game Over</h2>
+      <p id="loseReason"></p>
+      <div id="missedSection">
+        <p class="missed-heading">You missed:</p>
+        <div id="missedList"></div>
+      </div>
+      <div id="loseActions">
+        <button id="retryBtn">Try Again</button>
+        <button id="reviewBtn" class="hidden">📖 Review Missed</button>
+      </div>
+    </div>
+
+    <canvas id="confettiCanvas" class="confetti-canvas hidden"></canvas>
+
+    <!-- JS — data and state first, then UI helpers, then game logic, then events last -->
+    <script src="js/data.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/modes.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/events.js"></script>
+
+  </body>
+</html>
